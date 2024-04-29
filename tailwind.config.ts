@@ -1,7 +1,8 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: ['./src/**/*.tsx'],
+  content: ['./src/app/**/*.tsx', './src/components/**/*.tsx'],
+  darkMode: 'class',
   theme: {
     extend: {},
   },

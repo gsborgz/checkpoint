@@ -11,7 +11,7 @@ export type DictionaryData = {
   locale: LocaleFunction;
 };
 
-export function useDictionary(): DictionaryData {
+export function useLocale(): DictionaryData {
   const { language } = useContext(SessionContext);
 
   function locale(keyPath: string, args?: Record<string, any>): string {
