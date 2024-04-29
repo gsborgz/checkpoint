@@ -36,7 +36,8 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<UserLanguage>(UserLanguage.PTBR);
   const [loading, setLoading] = useState(true);
   const { theme, setTheme } = useTheme();
-  const signinSignupRoutes = ['/signin', '/signup'];
+  const authRoutes = ['/signin', '/signup'];
+  const publicRoutes = ['/status'];
   const pathname = usePathname();
   const session = useSession();
 
@@ -46,7 +47,7 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
     return <h1>Loading...</h1>;
   }
 
-  if (session.status === 'unauthenticated' && !signinSignupRoutes.includes(pathname)) {
+  if (session.status === 'unauthenticated' && !authRoutes.includes(pathname) && !publicRoutes.includes(pathname)) {
     setUser(null);
     redirect('/signin');
   }

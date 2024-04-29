@@ -88,5 +88,5 @@ export const text = {
     en: 'Confirm your password',
     fr: 'Confirmez votre mot de passe',
     ptbr: 'Confirme sua senha'
-  },
+  }
 }
