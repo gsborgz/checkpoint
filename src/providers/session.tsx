@@ -53,11 +53,11 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   }
 
   if (session.status === 'authenticated' && !user) {
-    const sessionUser = session.data as unknown as User;
+    const user = session.data.user as User;
 
-    setUser(sessionUser);
-    setLanguage(sessionUser.language);
-    setTheme(sessionUser.theme.toLocaleLowerCase());
+    setUser(user);
+    setLanguage(user.language);
+    setTheme(user.theme.toLocaleLowerCase());
   }
 
   async function setUserLanguage(newLanguage: UserLanguage) {
@@ -81,6 +81,7 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
 
     if (user) {
       setUserLanguage(newLanguage);
+      updateSessionUser();
     }
   }
 
@@ -89,7 +90,14 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
 
     if (user) {
       setUserTheme(newTheme);
+      updateSessionUser();
     }
+  }
+
+  async function updateSessionUser() {
+    setUser({ ...user, language, theme: theme.toLocaleUpperCase() as UserTheme });
+
+    await session.update();
   }
 
   return (
