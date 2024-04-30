@@ -37,6 +37,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.11.30",
     "@types/pg": "^8.11.4",
+    "@types/react": "18.3.1",
     "autoprefixer": "^10.4.18",
     "cypress": "^13.8.1",
     "dotenv-cli": "^7.4.1",
