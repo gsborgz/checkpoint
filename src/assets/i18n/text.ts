@@ -1,38 +1,48 @@
 export const text = {
-  home: {
-    en: 'Home',
-    fr: 'Accueil',
-    ptbr: 'Início'
+  account_deleted: {
+    en: 'Account deleted',
+    fr: 'Compte supprimé',
+    ptbr: 'Conta excluída'
   },
-  welcome: {
-    en: 'Hello World!',
-    fr: 'Bonjour le monde!',
-    ptbr: 'Olá Mundo!'
-  },
-  logout: {
-    en: 'Logout',
-    fr: 'Se déconnecter',
-    ptbr: 'Sair'
+  confirm_password: {
+    en: 'Confirm your password',
+    fr: 'Confirmez votre mot de passe',
+    ptbr: 'Confirme sua senha'
   },
   delete_account: {
     en: 'Delete Account',
     fr: 'Supprimer le compte',
     ptbr: 'Excluir conta'
   },
-  to_signup_page: {
-    en: 'Create an account',
-    fr: 'Créer un compte',
-    ptbr: 'Criar uma conta'
+  email_or_password_wrong: {
+    en: 'Email or password is wrong',
+    fr: 'L\'email ou le mot de passe est incorrect',
+    ptbr: 'E-mail ou senha incorretos'
   },
-  to_signin_page: {
-    en: 'Login with an existing account',
-    fr: 'Entrer avec un compte existant',
-    ptbr: 'Entrar com uma conta existente'
+  home: {
+    en: 'Home',
+    fr: 'Accueil',
+    ptbr: 'Início'
+  },
+  language_updated: {
+    en: 'Language updated',
+    fr: 'Langue mise à jour',
+    ptbr: 'Idioma atualizado'
   },
   login: {
     en: 'Login',
     fr: 'Connexion',
     ptbr: 'Entrar'
+  },
+  logout: {
+    en: 'Logout',
+    fr: 'Se déconnecter',
+    ptbr: 'Sair'
+  },
+  passwords_do_not_match: {
+    en: 'Passwords do not match',
+    fr: 'Les mots de passe ne correspondent pas',
+    ptbr: 'As senhas não coincidem'
   },
   register: {
     en: 'Register',
@@ -44,6 +54,21 @@ export const text = {
     fr: 'Envoyer',
     ptbr: 'Enviar'
   },
+  theme_updated: {
+    en: 'Theme updated',
+    fr: 'Thème mis à jour',
+    ptbr: 'Tema atualizado'
+  },
+  to_signin_page: {
+    en: 'Login with an existing account',
+    fr: 'Entrer avec un compte existant',
+    ptbr: 'Entrar com uma conta existente'
+  },
+  to_signup_page: {
+    en: 'Create an account',
+    fr: 'Créer un compte',
+    ptbr: 'Criar uma conta'
+  },
   type_email: {
     en: 'Type your email',
     fr: 'Tapez votre email',
@@ -54,39 +79,19 @@ export const text = {
     fr: 'Tapez votre mot de passe',
     ptbr: 'Digite sua senha'
   },
-  theme_updated: {
-    en: 'Theme updated',
-    fr: 'Thème mis à jour',
-    ptbr: 'Tema atualizado'
-  },
-  language_updated: {
-    en: 'Language updated',
-    fr: 'Langue mise à jour',
-    ptbr: 'Idioma atualizado'
-  },
   user_already_exists: {
     en: 'User already exists',
     fr: 'L\'utilisateur existe déjà',
     ptbr: 'Usuário já existe'
   },
-  passwords_do_not_match: {
-    en: 'Passwords do not match',
-    fr: 'Les mots de passe ne correspondent pas',
-    ptbr: 'As senhas não coincidem'
+  user_not_found: {
+    en: 'User not found',
+    fr: 'Utilisateur non trouvé',
+    ptbr: 'Usuário não encontrado'
   },
-  email_or_password_wrong: {
-    en: 'Email or password is wrong',
-    fr: 'L\'email ou le mot de passe est incorrect',
-    ptbr: 'E-mail ou senha incorretos'
-  },
-  account_deleted: {
-    en: 'Account deleted',
-    fr: 'Compte supprimé',
-    ptbr: 'Conta excluída'
-  },
-  confirm_password: {
-    en: 'Confirm your password',
-    fr: 'Confirmez votre mot de passe',
-    ptbr: 'Confirme sua senha'
+  welcome: {
+    en: 'Hello World!',
+    fr: 'Bonjour le monde!',
+    ptbr: 'Olá Mundo!'
   }
 }
