@@ -70,7 +70,10 @@ export default function SignIn() {
       <div className='flex flex-col justify-center items-center gap-2 dark:text-stone-100 text-stone-950'>
         <h1 className='text-3xl mb-6'>{locale('text.login')}</h1>
 
-        <form className='w-[400px] flex flex-col gap-6' onSubmit={handleSubmit}>
+        <form
+          className='w-[400px] flex flex-col gap-6'
+          onSubmit={handleSubmit}
+        >
           <input
             className='h-12 rounded-md p-2 bg-transparent border dark:border-stone-100 border-stone-950'
             type='text'

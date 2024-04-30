@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 export const authConfig: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
   },
   providers: [
     Credentials({
@@ -51,18 +51,18 @@ export const authConfig: AuthOptions = {
         token.user = user;
       }
 
-      return token
+      return token;
     },
 
     async session({ session, token, trigger }) {
       session = {
         ...session,
-        user: token.user
+        user: token.user,
       };
 
-      return session
-    }
-  }
+      return session;
+    },
+  },
 };
 
 export async function getSessionUser(): Promise<User> {

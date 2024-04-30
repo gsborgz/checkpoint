@@ -9,7 +9,10 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html
+      suppressHydrationWarning
+      lang='en'
+    >
       <body className='h-screen'>
         <ThemeProvider attribute='class'>
           <NextAuthSessionProvider>
