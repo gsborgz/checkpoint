@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { useState } from 'react';
 import { useTheme } from 'next-themes';
@@ -33,13 +33,32 @@ export const SessionContext = createContext({} as SessionData);
 
 function AppSessionProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [language, setLanguage] = useState<UserLanguage>(UserLanguage.PTBR);
+  const [language, setLanguage] = useState<UserLanguage>();
   const [loading, setLoading] = useState(true);
   const { theme, setTheme } = useTheme();
   const authRoutes = ['/signin', '/signup'];
   const publicRoutes = ['/status'];
   const pathname = usePathname();
   const session = useSession();
+
+  useEffect(() => {
+    const localStorageLanguage = localStorage.getItem('language') as UserLanguage;
+    const localStorageTheme = localStorage.getItem('theme') as UserTheme;
+
+    if (localStorageLanguage) {
+      setLanguage(localStorageLanguage);
+    } else {
+      localStorage.setItem('language', UserLanguage.en);
+      setLanguage(UserLanguage.en);
+    }
+
+    if (localStorageTheme) {
+      setTheme(localStorageTheme);
+    } else {
+      localStorage.setItem('theme', UserTheme.dark);
+      setTheme(UserTheme.dark);
+    }
+  }, []);
 
   if (loading && session.status !== 'loading') {
     setLoading(false);
@@ -79,6 +98,8 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   function changeLanguage(newLanguage: UserLanguage) {
     setLanguage(newLanguage);
 
+    localStorage.setItem('language', newLanguage);
+
     if (user) {
       setUserLanguage(newLanguage);
       updateSessionUser();
@@ -86,7 +107,9 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   }
 
   function changeTheme(newTheme: UserTheme): void {
-    setTheme(newTheme.toLocaleLowerCase());
+    setTheme(newTheme);
+
+    localStorage.setItem('theme', newTheme);
 
     if (user) {
       setUserTheme(newTheme);
@@ -95,8 +118,6 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function updateSessionUser() {
-    setUser({ ...user, language, theme: theme.toLocaleUpperCase() as UserTheme });
-
     await session.update();
   }
 
