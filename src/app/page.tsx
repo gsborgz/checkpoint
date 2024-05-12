@@ -40,6 +40,7 @@ export default function Home() {
       <div className='flex gap-2'>
         {languages.map((language) => (
           <button
+            id={`set-language-${language}-button`}
             className='p-2 w-20 border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
             key={language}
             onClick={() => changeLanguage(language)}
@@ -50,6 +51,7 @@ export default function Home() {
       </div>
 
       <button
+        id={`set-theme-button`}
         aria-label='Change Theme'
         type='button'
         className='p-2 w-fit border dark:border-stone-100 border-stone-950 rounded-md'
@@ -59,6 +61,7 @@ export default function Home() {
       </button>
 
       <button
+        id='delete-account-button'
         onClick={deleteAccount}
         className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
       >
@@ -66,6 +69,7 @@ export default function Home() {
       </button>
 
       <button
+        id='logout-button'
         onClick={logout}
         className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
       >

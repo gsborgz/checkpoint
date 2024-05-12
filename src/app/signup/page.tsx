@@ -54,6 +54,7 @@ export default function SignIn() {
       <div className='flex gap-2'>
         {languages.map((language) => (
           <button
+            id={`set-language-${language}-button`}
             className='p-2 w-20 border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
             key={language}
             onClick={() => changeLanguage(language)}
@@ -64,6 +65,7 @@ export default function SignIn() {
       </div>
 
       <button
+        id={`set-theme-button`}
         aria-label='Change Theme'
         type='button'
         className='p-2 w-fit border dark:border-stone-100 border-stone-950 rounded-md'
