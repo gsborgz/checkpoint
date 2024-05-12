@@ -2,7 +2,6 @@
 
 import { SyntheticEvent, useContext, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { SessionContext } from '@/providers/session';
 import { useLocale } from '@/hooks/locale';
 import { UserLanguage, UserTheme } from '@prisma/client';
@@ -12,7 +11,6 @@ import useLoaded from '@/hooks/loaded';
 export default function SignIn() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { user } = useContext(SessionContext);
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
@@ -23,10 +21,6 @@ export default function SignIn() {
 
   if (!loaded) {
     return null;
-  }
-
-  if (user) {
-    redirect('/');
   }
 
   async function handleSubmit(event: SyntheticEvent) {

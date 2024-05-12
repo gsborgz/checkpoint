@@ -1,7 +1,6 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { SyntheticEvent, useContext, useState } from 'react';
 import { useLocale } from '@/hooks/locale';
 import { SessionContext } from '@/providers/session';
@@ -20,7 +19,6 @@ export default function SignIn() {
   const languages = Object.values(UserLanguage);
   const sunIcon = <SunIcon className='h-5 w-5 text-stone-300' />;
   const moonIcon = <MoonIcon className='h-5 w-5 text-stone-950' />;
-  const router = useRouter();
 
   if (!loaded) {
     return null;
@@ -49,8 +47,6 @@ export default function SignIn() {
       console.error(result);
       return;
     }
-
-    router.push('/');
   }
 
   return (
