@@ -19,7 +19,7 @@ describe('Auth Cycle', () => {
     cy.get('input[name="password_confirmation"]').type(testUser.password);
     cy.get('button[type="submit"]').click();
     cy.get('h1').contains('Home');
-    cy.get('button[id="logout-button"]').click();
+    cy.get('#logout-button').click();
     cy.url().should('include', '/signin');
     cy.get('h1').contains('Login');
   });
@@ -32,28 +32,28 @@ describe('Auth Cycle', () => {
     cy.get('button[type="submit"]').click();
     cy.get('h1').contains('Home');
 
-    cy.get('button[id="set-language-ptbr-button"]').click();
+    cy.get('#set-language-ptbr-button').click();
     cy.get('h1').contains('Início');
 
     cy.get('main').should('have.css', 'background-color', 'rgb(12, 10, 9)');
-    cy.get('button[id="set-language-ptbr-button"]').should('have.css', 'color', 'rgb(245, 245, 244)');
-    cy.get('button[id="set-language-ptbr-button"]').should('have.css', 'border-color', 'rgb(245, 245, 244)');
-    cy.get('button[id="set-theme-button"]').click();
+    cy.get('#set-language-ptbr-button').should('have.css', 'color', 'rgb(245, 245, 244)');
+    cy.get('#set-language-ptbr-button').should('have.css', 'border-color', 'rgb(245, 245, 244)');
+    cy.get('#set-theme-button').click();
     cy.get('main').should('have.css', 'background-color', 'rgb(245, 245, 244)');
-    cy.get('button[id="set-language-ptbr-button"]').should('have.css', 'color', 'rgb(12, 10, 9)');
-    cy.get('button[id="set-language-ptbr-button"]').should('have.css', 'border-color', 'rgb(12, 10, 9)');
+    cy.get('#set-language-ptbr-button').should('have.css', 'color', 'rgb(12, 10, 9)');
+    cy.get('#set-language-ptbr-button').should('have.css', 'border-color', 'rgb(12, 10, 9)');
 
-    cy.get('button[id="logout-button"]').click();
+    cy.get('#logout-button').click();
     cy.url().should('include', '/signin');
     cy.get('h1').contains('Entrar');
 
-    cy.get('button[id="set-language-en-button"]').click();
+    cy.get('#set-language-en-button').click();
     cy.get('h1').contains('Login');
 
-    cy.get('button[id="set-theme-button"]').click();
+    cy.get('#set-theme-button').click();
     cy.get('main').should('have.css', 'background-color', 'rgb(12, 10, 9)');
-    cy.get('button[id="set-language-ptbr-button"]').should('have.css', 'color', 'rgb(245, 245, 244)');
-    cy.get('button[id="set-language-ptbr-button"]').should('have.css', 'border-color', 'rgb(245, 245, 244)');
+    cy.get('#set-language-ptbr-button').should('have.css', 'color', 'rgb(245, 245, 244)');
+    cy.get('#set-language-ptbr-button').should('have.css', 'border-color', 'rgb(245, 245, 244)');
   });
 
   it('should login and delete account', () => {
@@ -64,7 +64,7 @@ describe('Auth Cycle', () => {
     cy.get('button[type="submit"]').click();
     cy.get('h1').contains('Home');
 
-    cy.get('button[id="delete-account-button"]').click();
+    cy.get('#delete-account-button').click();
     cy.url().should('include', '/signin');
   });
 })
