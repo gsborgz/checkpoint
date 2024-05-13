@@ -67,8 +67,6 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   }
 
   if (session.status === 'unauthenticated' && !authRoutes.includes(currentRoute) && !publicRoutes.includes(currentRoute)) {
-    console.log('caiu no não autenticado');
-
     if (user) {
       setUser(null);
     }
