@@ -55,7 +55,7 @@ export default function SignIn() {
         {languages.map((language) => (
           <button
             id={`set-language-${language}-button`}
-            className='p-2 w-20 border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+            className='p-2 w-20 border dark:border-stone-100 border-stone-950 rounded-md'
             key={language}
             onClick={() => changeLanguage(language)}
           >
@@ -74,7 +74,7 @@ export default function SignIn() {
         {isDarkThemeEnabled ? sunIcon : moonIcon}
       </button>
 
-      <div className='flex flex-col justify-center items-center gap-2 dark:text-stone-100 text-stone-950'>
+      <div className='flex flex-col justify-center items-center gap-2'>
         <h1 className='text-3xl mb-6'>{locale('text.register')}</h1>
 
         <form

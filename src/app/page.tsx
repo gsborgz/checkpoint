@@ -32,7 +32,7 @@ export default function Home() {
   }
 
   return (
-    <section className='flex flex-col gap-4 dark:text-stone-100 text-stone-950'>
+    <section className='flex flex-col gap-4'>
       <h1 className='m-0'>{locale('text.home')}</h1>
 
       <span>{locale('text.welcome')}</span>
@@ -41,7 +41,7 @@ export default function Home() {
         {languages.map((language) => (
           <button
             id={`set-language-${language}-button`}
-            className='p-2 w-20 border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+            className='p-2 w-20 border dark:border-stone-100 border-stone-950 rounded-md'
             key={language}
             onClick={() => changeLanguage(language)}
           >
@@ -63,7 +63,7 @@ export default function Home() {
       <button
         id='delete-account-button'
         onClick={deleteAccount}
-        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 rounded-md'
       >
         {locale('text.delete_account')}
       </button>
@@ -71,7 +71,7 @@ export default function Home() {
       <button
         id='logout-button'
         onClick={logout}
-        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 rounded-md'
       >
         {locale('text.logout')}
       </button>

@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className='h-screen'>
         <ThemeProvider attribute='class'>
           <NextAuthSessionProvider>
-            <main className='bg-stone-100 dark:bg-stone-950 h-full'>{children}</main>
+            <main className='bg-stone-100 dark:bg-stone-950 dark:text-stone-100 text-stone-950 h-full'>{children}</main>
           </NextAuthSessionProvider>
         </ThemeProvider>
       </body>
