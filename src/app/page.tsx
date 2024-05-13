@@ -12,7 +12,7 @@ export default function Home() {
   const { locale } = useLocale();
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
   const { loaded } = useLoaded();
-  const isDarkThemeEnabled = theme === UserTheme.DARK.toLocaleLowerCase();
+  const isDarkThemeEnabled = theme === UserTheme.dark;
   const languages = Object.values(UserLanguage);
   const sunIcon = <SunIcon className='h-5 w-5 text-stone-300' />;
   const moonIcon = <MoonIcon className='h-5 w-5 text-stone-950' />;
@@ -32,7 +32,7 @@ export default function Home() {
   }
 
   return (
-    <section className='flex flex-col gap-4 dark:text-stone-100 text-stone-950'>
+    <section className='flex flex-col gap-4'>
       <h1 className='m-0'>{locale('text.home')}</h1>
 
       <span>{locale('text.welcome')}</span>
@@ -40,7 +40,8 @@ export default function Home() {
       <div className='flex gap-2'>
         {languages.map((language) => (
           <button
-            className='p-2 w-20 border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+            id={`set-language-${language}-button`}
+            className='p-2 w-20 border dark:border-stone-100 border-stone-950 rounded-md'
             key={language}
             onClick={() => changeLanguage(language)}
           >
@@ -50,24 +51,27 @@ export default function Home() {
       </div>
 
       <button
+        id={`set-theme-button`}
         aria-label='Change Theme'
         type='button'
         className='p-2 w-fit border dark:border-stone-100 border-stone-950 rounded-md'
-        onClick={() => changeTheme(isDarkThemeEnabled ? UserTheme.LIGHT : UserTheme.DARK)}
+        onClick={() => changeTheme(isDarkThemeEnabled ? UserTheme.light : UserTheme.dark)}
       >
         {isDarkThemeEnabled ? sunIcon : moonIcon}
       </button>
 
       <button
+        id='delete-account-button'
         onClick={deleteAccount}
-        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 rounded-md'
       >
         {locale('text.delete_account')}
       </button>
 
       <button
+        id='logout-button'
         onClick={logout}
-        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 dark:text-stone-100 text-stone-950 rounded-md'
+        className='p-2 w-fit min-w-[80px] border dark:border-stone-100 border-stone-950 rounded-md'
       >
         {locale('text.logout')}
       </button>

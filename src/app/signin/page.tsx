@@ -2,7 +2,6 @@
 
 import { SyntheticEvent, useContext, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { SessionContext } from '@/providers/session';
 import { useLocale } from '@/hooks/locale';
 import { UserLanguage, UserTheme } from '@prisma/client';
@@ -12,21 +11,16 @@ import useLoaded from '@/hooks/loaded';
 export default function SignIn() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { user } = useContext(SessionContext);
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
-  const isDarkThemeEnabled = theme === UserTheme.DARK.toLocaleLowerCase();
+  const isDarkThemeEnabled = theme === UserTheme.dark;
   const languages = Object.values(UserLanguage);
   const sunIcon = <SunIcon className='h-5 w-5 text-stone-300' />;
   const moonIcon = <MoonIcon className='h-5 w-5 text-stone-950' />;
 
   if (!loaded) {
     return null;
-  }
-
-  if (user) {
-    redirect('/');
   }
 
   async function handleSubmit(event: SyntheticEvent) {
@@ -49,7 +43,8 @@ export default function SignIn() {
       <div className='flex gap-2'>
         {languages.map((language) => (
           <button
-            className='p-2 w-20 border dark:border-stone-100 border-stone-950 rounded-md dark:text-stone-100 text-stone-950'
+            id={`set-language-${language}-button`}
+            className='p-2 w-20 border dark:border-stone-100 border-stone-950 rounded-md'
             key={language}
             onClick={() => changeLanguage(language)}
           >
@@ -59,15 +54,16 @@ export default function SignIn() {
       </div>
 
       <button
+        id={`set-theme-button`}
         aria-label='Change Theme'
         type='button'
         className='p-2 w-fit border dark:border-stone-100 border-stone-950 rounded-md'
-        onClick={() => changeTheme(isDarkThemeEnabled ? UserTheme.LIGHT : UserTheme.DARK)}
+        onClick={() => changeTheme(isDarkThemeEnabled ? UserTheme.light : UserTheme.dark)}
       >
         {isDarkThemeEnabled ? sunIcon : moonIcon}
       </button>
 
-      <div className='flex flex-col justify-center items-center gap-2 dark:text-stone-100 text-stone-950'>
+      <div className='flex flex-col justify-center items-center gap-2'>
         <h1 className='text-3xl mb-6'>{locale('text.login')}</h1>
 
         <form
