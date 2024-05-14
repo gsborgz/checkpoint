@@ -94,4 +94,39 @@ export const text = {
     fr: 'Bonjour le monde!',
     ptbr: 'Olá Mundo!',
   },
+  invalid_email: {
+    en: 'Invalid email',
+    fr: 'Email invalide',
+    ptbr: 'E-mail inválido',
+  },
+  email_required: {
+    en: 'Email is required',
+    fr: 'Email est requis',
+    ptbr: 'E-mail é obrigatório',
+  },
+  password_min_length: {
+    en: 'Password must have at least {value} characters',
+    fr: 'Le mot de passe doit comporter au moins {value} caractères',
+    ptbr: 'A senha deve ter pelo menos {value} caracteres',
+  },
+  password_required: {
+    en: 'Password is required',
+    fr: 'Le mot de passe est requis',
+    ptbr: 'Senha é obrigatória',
+  },
+  password_confirmation_required: {
+    en: 'Password confirmation is required',
+    fr: 'La confirmation du mot de passe est requise',
+    ptbr: 'Confirmação de senha é obrigatória',
+  },
+  invalid_theme: {
+    en: 'Invalid theme',
+    fr: 'Thème invalide',
+    ptbr: 'Tema inválido',
+  },
+  invalid_language: {
+    en: 'Invalid language',
+    fr: 'Langue invalide',
+    ptbr: 'Idioma inválido',
+  }
 };

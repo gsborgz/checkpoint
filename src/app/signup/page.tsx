@@ -3,16 +3,20 @@
 import { signIn } from 'next-auth/react';
 import { SyntheticEvent, useContext, useState } from 'react';
 import { useLocale } from '@/hooks/locale';
-import { SessionContext } from '@/providers/session';
 import { UserLanguage, UserTheme } from '@prisma/client';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import useLoaded from '@/hooks/loaded';
+import { clientSignupSchema } from '@/validations/auth';
+import { SnackbarTheme } from '@/components/snackbar';
+import { SnackbarContext } from '@/providers/snackbar';
+import { SessionContext } from '@/providers/session';
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
+  const { showMessage } = useContext(SnackbarContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
   const isDarkThemeEnabled = theme === UserTheme.dark;
@@ -27,25 +31,36 @@ export default function SignIn() {
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
-    const response = await fetch('api/v1/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, password_confirmation: passwordConfirmation }),
-    });
+    try {
+      const body = { email, password, password_confirmation: passwordConfirmation };
 
-    if (!response.ok) {
-      throw new Error('text.signup_error');
-    }
+      await clientSignupSchema.validate(body);
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    });
+      const response = await fetch('api/v1/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
 
-    if (result?.error) {
-      console.error(result);
-      return;
+      if (response.ok) {
+        const result = await signIn('credentials', {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          throw new Error(result.error);
+        }
+      } else {
+        throw new Error(JSON.parse(await response.text()));
+      }
+    } catch (error) {
+      const message = JSON.parse(error.message);
+
+      if (message?.key) {
+        showMessage(message.key, message.args, SnackbarTheme.Error);
+      }
     }
   }
 

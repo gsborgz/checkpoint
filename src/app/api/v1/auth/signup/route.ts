@@ -1,6 +1,8 @@
 import { pgDatabase } from '@/core/pg-database';
 import { UserLanguage, UserTheme } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { serverSignupSchema } from '@/validations/auth';
+import { NextResponse } from 'next/server';
 
 type SignupInput = {
   email: string;
@@ -13,9 +15,21 @@ type SignupInput = {
 export async function POST(request: Request) {
   const body: SignupInput = await request.json();
 
-  await checkIfUserDoesNotExist(body.email);
+  try {
+    serverSignupSchema.validateSync(body);
+  } catch (error) {
+    return NextResponse.json(error.message, { status: 400 });
+  }
 
-  checkIfPasswordsMatch(body);
+  const dbUser = await pgDatabase.user.findUnique({ where: { email: body.email } })
+
+  if (dbUser) {
+    return NextResponse.json(JSON.stringify({ key: 'text.user_already_exists' }), { status: 400 });
+  }
+
+  if (body.password !== body.password_confirmation) {
+    return NextResponse.json(JSON.stringify({ key: 'text.passwords_do_not_match' }), { status: 400 });
+  }
 
   const user = await pgDatabase.user.create({
     data: {
@@ -31,20 +45,6 @@ export async function POST(request: Request) {
   return Response.json(user);
 }
 
-async function checkIfUserDoesNotExist(email: string): Promise<void> {
-  const user = await pgDatabase.user.findUnique({ where: { email } });
-
-  if (user) {
-    throw new Error('text.user_already_exists');
-  }
-}
-
 async function encryptPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 10);
-}
-
-function checkIfPasswordsMatch(body: SignupInput): void {
-  if (body.password !== body.password_confirmation) {
-    throw new Error('text.passwords_do_not_match');
-  }
 }

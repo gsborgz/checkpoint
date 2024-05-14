@@ -2,16 +2,19 @@
 
 import { SyntheticEvent, useContext, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { SessionContext } from '@/providers/session';
 import { useLocale } from '@/hooks/locale';
 import { UserLanguage, UserTheme } from '@prisma/client';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import useLoaded from '@/hooks/loaded';
+import { SessionContext } from '@/providers/session';
+import { SnackbarContext } from '@/providers/snackbar';
+import { SnackbarTheme } from '../../components/snackbar';
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
+  const { showMessage } = useContext(SnackbarContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
   const isDarkThemeEnabled = theme === UserTheme.dark;
@@ -26,15 +29,22 @@ export default function SignIn() {
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      console.error(result);
-      return;
+      if (result?.error) {
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      const message = JSON.parse(error.message);
+
+      if (message?.key) {
+        showMessage(message.key, message.args, SnackbarTheme.Error);
+      }
     }
   }
 
