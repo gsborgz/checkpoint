@@ -5,7 +5,7 @@ import { serverSignupSchema } from '@/validations/auth';
 import { NextResponse } from 'next/server';
 
 type SignupInput = {
-  email: string;
+  username: string;
   password: string;
   password_confirmation: string;
   theme: UserTheme;
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     return NextResponse.json(error.message, { status: 400 });
   }
 
-  const dbUser = await pgDatabase.user.findUnique({ where: { email: body.email } })
+  const dbUser = await pgDatabase.user.findUnique({ where: { username: body.username } })
 
   if (dbUser) {
     return NextResponse.json(JSON.stringify({ key: 'text.user_already_exists' }), { status: 400 });
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
   const user = await pgDatabase.user.create({
     data: {
-      email: body.email,
+      username: body.username,
       password: await encryptPassword(body.password),
       theme: body.theme,
       language: body.language,

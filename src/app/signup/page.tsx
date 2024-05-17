@@ -12,11 +12,11 @@ import { SnackbarContext } from '@/providers/snackbar';
 import { SessionContext } from '@/providers/session';
 
 export default function SignIn() {
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
-  const { showMessage } = useContext(SnackbarContext);
+  const { showErrorMessage } = useContext(SnackbarContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
   const isDarkThemeEnabled = theme === UserTheme.dark;
@@ -32,7 +32,7 @@ export default function SignIn() {
     event.preventDefault();
 
     try {
-      const body = { email, password, password_confirmation: passwordConfirmation };
+      const body = { username, password, password_confirmation: passwordConfirmation };
 
       await clientSignupSchema.validate(body);
 
@@ -44,7 +44,7 @@ export default function SignIn() {
 
       if (response.ok) {
         const result = await signIn('credentials', {
-          email,
+          username,
           password,
           redirect: false,
         });
@@ -56,11 +56,7 @@ export default function SignIn() {
         throw new Error(JSON.parse(await response.text()));
       }
     } catch (error) {
-      const message = JSON.parse(error.message);
-
-      if (message?.key) {
-        showMessage(message.key, message.args, SnackbarTheme.Error);
-      }
+      showErrorMessage(error.message);
     }
   }
 
@@ -99,9 +95,9 @@ export default function SignIn() {
           <input
             className='h-12 rounded-md p-2 bg-transparent border dark:border-stone-100 border-stone-950'
             type='text'
-            name='email'
-            placeholder={locale('text.type_email')}
-            onChange={(e) => setEmail(e.target.value)}
+            name='username'
+            placeholder={locale('text.type_username')}
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <input

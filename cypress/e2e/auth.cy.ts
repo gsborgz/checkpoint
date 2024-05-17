@@ -1,6 +1,6 @@
 const testUser = {
-  email: 'test@cypress.com',
-  password: '123456',
+  username: 'testeUser',
+  password: 'Test@123',
 };
 
 describe('Auth Cycle', () => {
@@ -14,7 +14,7 @@ describe('Auth Cycle', () => {
     cy.get('a[href*="/signup"]').click();
     cy.url().should('include', '/signup');
 
-    cy.get('input[name="email"]').type(testUser.email);
+    cy.get('input[name="username"]').type(testUser.username);
     cy.get('input[name="password"]').type(testUser.password);
     cy.get('input[name="password_confirmation"]').type(testUser.password);
     cy.get('button[type="submit"]').click();
@@ -27,7 +27,7 @@ describe('Auth Cycle', () => {
   it('should login and update theme and language', () => {
     cy.visit('http://localhost:3000/signin');
     cy.get('h1').contains('Login');
-    cy.get('input[name="email"]').type(testUser.email);
+    cy.get('input[name="username"]').type(testUser.username);
     cy.get('input[name="password"]').type(testUser.password);
     cy.get('button[type="submit"]').click();
     cy.get('h1').contains('Home');
@@ -59,7 +59,7 @@ describe('Auth Cycle', () => {
   it('should login and delete account', () => {
     cy.visit('http://localhost:3000/signin');
     cy.get('h1').contains('Login');
-    cy.get('input[name="email"]').type(testUser.email);
+    cy.get('input[name="username"]').type(testUser.username);
     cy.get('input[name="password"]').type(testUser.password);
     cy.get('button[type="submit"]').click();
     cy.get('h1').contains('Home');

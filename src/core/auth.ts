@@ -12,7 +12,7 @@ export const authConfig: AuthOptions = {
   providers: [
     Credentials({
       credentials: {
-        email: { label: 'email', type: 'text' },
+        username: { label: 'username', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
       authorize: async (credentials) => {
@@ -20,9 +20,9 @@ export const authConfig: AuthOptions = {
           throw new Error(JSON.stringify({ key: 'text.no_credentials_provided' }));
         }
 
-        const email = credentials.email as string;
+        const username = credentials.username as string;
         const password = credentials.password as string;
-        const user = await pgDatabase.user.findUnique({ where: { email } });
+        const user = await pgDatabase.user.findUnique({ where: { username } });
 
         if (!user) {
           throw new Error(JSON.stringify({ key: 'text.email_or_password_wrong' }));

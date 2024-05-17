@@ -11,10 +11,10 @@ import { SnackbarContext } from '@/providers/snackbar';
 import { SnackbarTheme } from '../../components/snackbar';
 
 export default function SignIn() {
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
-  const { showMessage } = useContext(SnackbarContext);
+  const { showErrorMessage } = useContext(SnackbarContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
   const isDarkThemeEnabled = theme === UserTheme.dark;
@@ -31,7 +31,7 @@ export default function SignIn() {
 
     try {
       const result = await signIn('credentials', {
-        email,
+        username,
         password,
         redirect: false,
       });
@@ -40,11 +40,7 @@ export default function SignIn() {
         throw new Error(result.error);
       }
     } catch (error) {
-      const message = JSON.parse(error.message);
-
-      if (message?.key) {
-        showMessage(message.key, message.args, SnackbarTheme.Error);
-      }
+      showErrorMessage(error.message);
     }
   }
 
@@ -83,10 +79,10 @@ export default function SignIn() {
           <input
             className='h-12 rounded-md p-2 bg-transparent border dark:border-stone-100 border-stone-950'
             type='text'
-            name='email'
-            placeholder={locale('text.type_email')}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            name='username'
+            placeholder={locale('text.type_username')}
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           />
 
           <input
