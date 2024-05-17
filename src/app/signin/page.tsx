@@ -2,16 +2,19 @@
 
 import { SyntheticEvent, useContext, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { SessionContext } from '@/providers/session';
 import { useLocale } from '@/hooks/locale';
 import { UserLanguage, UserTheme } from '@prisma/client';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import useLoaded from '@/hooks/loaded';
+import { SessionContext } from '@/providers/session';
+import { SnackbarContext } from '@/providers/snackbar';
+import { SnackbarTheme } from '../../components/snackbar';
 
 export default function SignIn() {
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
+  const { showErrorMessage } = useContext(SnackbarContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
   const isDarkThemeEnabled = theme === UserTheme.dark;
@@ -26,15 +29,18 @@ export default function SignIn() {
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      const result = await signIn('credentials', {
+        username,
+        password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      console.error(result);
-      return;
+      if (result?.error) {
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      showErrorMessage(error.message);
     }
   }
 
@@ -73,10 +79,10 @@ export default function SignIn() {
           <input
             className='h-12 rounded-md p-2 bg-transparent border dark:border-stone-100 border-stone-950'
             type='text'
-            name='email'
-            placeholder={locale('text.type_email')}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            name='username'
+            placeholder={locale('text.type_username')}
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           />
 
           <input

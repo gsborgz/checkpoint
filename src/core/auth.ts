@@ -12,20 +12,20 @@ export const authConfig: AuthOptions = {
   providers: [
     Credentials({
       credentials: {
-        email: { label: 'email', type: 'text' },
+        username: { label: 'username', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
       authorize: async (credentials) => {
         if (!credentials) {
-          throw new Error('text.no_credentials_provided');
+          throw new Error(JSON.stringify({ key: 'text.no_credentials_provided' }));
         }
 
-        const email = credentials.email as string;
+        const username = credentials.username as string;
         const password = credentials.password as string;
-        const user = await pgDatabase.user.findUnique({ where: { email } });
+        const user = await pgDatabase.user.findUnique({ where: { username } });
 
         if (!user) {
-          throw new Error('text.email_or_password_wrong');
+          throw new Error(JSON.stringify({ key: 'text.email_or_password_wrong' }));
         }
 
         await comparePassword(password, user.password);
@@ -43,7 +43,7 @@ export const authConfig: AuthOptions = {
         const updatedUser = await pgDatabase.user.findUnique({ where: { id: sessionUser.id } });
 
         if (!updatedUser) {
-          throw new Error('text.user_not_found');
+          throw new Error(JSON.stringify({ key: 'text.user_not_found' }));
         }
 
         token.user = updatedUser;
@@ -70,7 +70,7 @@ export async function getSessionUser(): Promise<User> {
   const user = session.user as User;
 
   if (!user || !user.id) {
-    throw new Error('text.unauthenticated');
+    throw new Error(JSON.stringify({ key: 'text.unauthenticated' }));
   }
 
   return user;
@@ -80,6 +80,6 @@ async function comparePassword(input_password: string, database_password: string
   const samePassword = await bcrypt.compare(input_password, database_password);
 
   if (!samePassword) {
-    throw new Error('text.email_or_password_wrong');
+    throw new Error(JSON.stringify({ key: 'text.email_or_password_wrong' }));
   }
 }

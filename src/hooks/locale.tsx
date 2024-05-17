@@ -1,7 +1,6 @@
 'use client';
 
 import * as translations from '@/assets/i18n';
-import { UserLanguage } from '@prisma/client';
 import { useContext } from 'react';
 import { SessionContext } from '@/providers/session';
 

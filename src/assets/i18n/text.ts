@@ -24,6 +24,11 @@ export const text = {
     fr: 'Accueil',
     ptbr: 'Início',
   },
+  type_username: {
+    en: 'Type your username',
+    fr: 'Tapez votre nom d\'utilisateur',
+    ptbr: 'Digite seu nome de usuário',
+  },
   language_updated: {
     en: 'Language updated',
     fr: 'Langue mise à jour',
@@ -39,10 +44,30 @@ export const text = {
     fr: 'Se déconnecter',
     ptbr: 'Sair',
   },
+  username_length: {
+    en: 'Username must have at least {min} characters and at most {max}',
+    fr: 'Le nom d\'utilisateur doit contenir au moins {min} caractères et au plus {max}',
+    ptbr: 'Nome de usuário deve ter no mínimo {min} caracteres e no máximo {max}',
+  },
+  username_format: {
+    en: 'Username must contain only letters and numbers',
+    fr: 'Le nom d\'utilisateur doit contenir uniquement des lettres et des chiffres',
+    ptbr: 'Nome de usuário deve conter apenas letras e números',
+  },
   passwords_do_not_match: {
     en: 'Passwords do not match',
     fr: 'Les mots de passe ne correspondent pas',
     ptbr: 'As senhas não coincidem',
+  },
+  username_required: {
+    en: 'Username is required',
+    fr: 'Nom d\'utilisateur est requis',
+    ptbr: 'Nome de usuário é obrigatório',
+  },
+  password_format: {
+    en: 'Password must contain at least 1 of each: Uppercase letter, lowercase letter, number and special character',
+    fr: 'Le mot de passe doit contenir au moins 1 de chaque: Lettre majuscule, minuscule, chiffre et caractère spécial',
+    ptbr: 'A senha deve conter pelo menos 1 de cada: Letra maiúscula, minúscula, número e caractere especial',
   },
   register: {
     en: 'Register',
@@ -94,4 +119,39 @@ export const text = {
     fr: 'Bonjour le monde!',
     ptbr: 'Olá Mundo!',
   },
+  invalid_email: {
+    en: 'Invalid email',
+    fr: 'Email invalide',
+    ptbr: 'E-mail inválido',
+  },
+  email_required: {
+    en: 'Email is required',
+    fr: 'Email est requis',
+    ptbr: 'E-mail é obrigatório',
+  },
+  password_min_length: {
+    en: 'Password must have at least {value} characters',
+    fr: 'Le mot de passe doit comporter au moins {value} caractères',
+    ptbr: 'A senha deve ter pelo menos {value} caracteres',
+  },
+  password_required: {
+    en: 'Password is required',
+    fr: 'Le mot de passe est requis',
+    ptbr: 'Senha é obrigatória',
+  },
+  password_confirmation_required: {
+    en: 'Password confirmation is required',
+    fr: 'La confirmation du mot de passe est requise',
+    ptbr: 'Confirmação de senha é obrigatória',
+  },
+  invalid_theme: {
+    en: 'Invalid theme',
+    fr: 'Thème invalide',
+    ptbr: 'Tema inválido',
+  },
+  invalid_language: {
+    en: 'Invalid language',
+    fr: 'Langue invalide',
+    ptbr: 'Idioma inválido',
+  }
 };
