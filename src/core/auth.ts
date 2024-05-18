@@ -1,5 +1,5 @@
-import { User } from '@prisma/client';
-import { AuthOptions, getServerSession } from 'next-auth';
+import { User } from "@prisma/client";
+import { AuthOptions, getServerSession } from "next-auth";
 import Credentials from 'next-auth/providers/credentials';
 import { pgDatabase } from '@/core/pg-database';
 import * as bcrypt from 'bcrypt';
@@ -25,7 +25,7 @@ export const authConfig: AuthOptions = {
         const user = await pgDatabase.user.findUnique({ where: { username } });
 
         if (!user) {
-          throw new Error(JSON.stringify({ key: 'text.email_or_password_wrong' }));
+          throw new Error(JSON.stringify({ key: 'text.username_or_password_wrong' }));
         }
 
         await comparePassword(password, user.password);
@@ -62,8 +62,8 @@ export const authConfig: AuthOptions = {
 
       return session;
     },
-  },
-};
+  }
+}
 
 export async function getSessionUser(): Promise<User> {
   const session = await getServerSession(authConfig);
@@ -80,6 +80,6 @@ async function comparePassword(input_password: string, database_password: string
   const samePassword = await bcrypt.compare(input_password, database_password);
 
   if (!samePassword) {
-    throw new Error(JSON.stringify({ key: 'text.email_or_password_wrong' }));
+    throw new Error(JSON.stringify({ key: 'text.username_or_password_wrong' }));
   }
 }
