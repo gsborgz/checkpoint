@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     return NextResponse.json(error.message, { status: 400 });
   }
 
-  const dbUser = await pgDatabase.user.findUnique({ where: { username: body.username } })
+  const dbUser = await pgDatabase.user.findUnique({ where: { username: body.username } });
 
   if (dbUser) {
     return NextResponse.json(JSON.stringify({ key: 'text.user_already_exists' }), { status: 400 });

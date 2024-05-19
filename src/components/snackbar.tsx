@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useContext } from 'react';
 import { SnackbarContext } from '@/providers/snackbar';
@@ -24,12 +24,10 @@ export default function Snackbar() {
   if (!openSnackbar) {
     return null;
   }
-  
+
   return (
     <div className='fixed bottom-4 right-4 flex gap-4'>
-      <div className={`${themes[snackbarTheme]} p-4 rounded-md`}>
-        {snackbarText}
-      </div>
+      <div className={`${themes[snackbarTheme]} p-4 rounded-md`}>{snackbarText}</div>
     </div>
   );
 }

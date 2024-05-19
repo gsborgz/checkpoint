@@ -18,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute='class'>
           <NextAuthSessionProvider>
             <SnackbarProvider>
-              <main className='bg-stone-100 dark:bg-stone-950 dark:text-stone-100 text-stone-950 h-full'>{children}</main>
+              <main className='bg-stone-100 dark:bg-stone-950 dark:text-stone-100 text-stone-950 h-full'>
+                {children}
+              </main>
             </SnackbarProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>

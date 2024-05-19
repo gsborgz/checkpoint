@@ -1,5 +1,5 @@
-import { User } from "@prisma/client";
-import { AuthOptions, getServerSession } from "next-auth";
+import { User } from '@prisma/client';
+import { AuthOptions, getServerSession } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { pgDatabase } from '@/core/pg-database';
 import * as bcrypt from 'bcrypt';
@@ -62,8 +62,8 @@ export const authConfig: AuthOptions = {
 
       return session;
     },
-  }
-}
+  },
+};
 
 export async function getSessionUser(): Promise<User> {
   const session = await getServerSession(authConfig);

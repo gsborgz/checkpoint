@@ -67,4 +67,4 @@ describe('Auth Cycle', () => {
     cy.get('#delete-account-button').click();
     cy.url().should('include', '/signin');
   });
-})
+});

@@ -10,8 +10,14 @@ const passwordMinLength = 8;
 export const clientSignupSchema = Yup.object().shape({
   username: Yup.string()
     .matches(usernameRegex, buildTranslationJson('text.username_format'))
-    .min(usernameMinLength, buildTranslationJson('text.username_length', { min: usernameMinLength, max: usernameMaxLength }))
-    .max(usernameMaxLength, buildTranslationJson('text.username_length', { min: usernameMinLength, max: usernameMaxLength }))
+    .min(
+      usernameMinLength,
+      buildTranslationJson('text.username_length', { min: usernameMinLength, max: usernameMaxLength }),
+    )
+    .max(
+      usernameMaxLength,
+      buildTranslationJson('text.username_length', { min: usernameMinLength, max: usernameMaxLength }),
+    )
     .required(buildTranslationJson('text.username_required')),
   password: Yup.string()
     .min(passwordMinLength, buildTranslationJson('text.password_min_length', { value: passwordMinLength }))
@@ -24,7 +30,7 @@ export const clientSignupSchema = Yup.object().shape({
 
 export const serverSignupSchema = Yup.object().shape({
   username: Yup.string()
-    .matches(usernameRegex, "text.username_format")
+    .matches(usernameRegex, 'text.username_format')
     .required(buildTranslationJson('text.username_format'))
     .required(buildTranslationJson('text.username_required')),
   password: Yup.string()
