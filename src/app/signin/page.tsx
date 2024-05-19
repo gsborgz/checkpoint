@@ -8,7 +8,6 @@ import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import useLoaded from '@/hooks/loaded';
 import { SessionContext } from '@/providers/session';
 import { SnackbarContext } from '@/providers/snackbar';
-import { SnackbarTheme } from '../../components/snackbar';
 
 export default function SignIn() {
   const [username, setUsername] = useState<string>('');
