@@ -15,7 +15,7 @@ export default function SignIn() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
-  const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
+  const { theme, language, changeLanguage, changeTheme } = useContext(SessionContext);
   const { showErrorMessage } = useContext(SnackbarContext);
   const { locale } = useLocale();
   const { loaded } = useLoaded();
@@ -32,7 +32,7 @@ export default function SignIn() {
     event.preventDefault();
 
     try {
-      const body = { username, password, password_confirmation: passwordConfirmation };
+      const body = { username, password, password_confirmation: passwordConfirmation, theme, language };
 
       await clientSignupSchema.validate(body);
 
