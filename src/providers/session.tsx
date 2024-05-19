@@ -62,11 +62,15 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
+  if (!mounted || session.status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (session.status === 'unauthenticated' && !authRoutes.includes(currentRoute) && !publicRoutes.includes(currentRoute)) {
+  if (
+    session.status === 'unauthenticated' &&
+    !authRoutes.includes(currentRoute) &&
+    !publicRoutes.includes(currentRoute)
+  ) {
     if (user) {
       setUser(null);
     }
@@ -79,7 +83,7 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   if (session.status === 'authenticated') {
     if (!user) {
       const user = session.data.user as User;
-  
+
       setUser(user);
       setLanguage(user.language);
       setTheme(user.theme.toLocaleLowerCase());
