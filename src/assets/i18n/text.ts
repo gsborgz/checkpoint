@@ -39,6 +39,11 @@ export const text = {
     fr: 'Thème invalide',
     ptbr: 'Tema inválido'
   },
+  language_required: {
+    en: 'Language is required',
+    fr: 'La langue est requise',
+    ptbr: 'Idioma é obrigatório'
+  },
   language_updated: {
     en: 'Language updated',
     fr: 'Langue mise à jour',
@@ -58,11 +63,6 @@ export const text = {
     en: 'Password confirmation is required',
     fr: 'La confirmation du mot de passe est requise',
     ptbr: 'Confirmação de senha é obrigatória'
-  },
-  password_format: {
-    en: 'Password must contain at least 1 of each: Uppercase letter, lowercase letter, number and special character',
-    fr: 'Le mot de passe doit contenir au moins 1 de chaque: Lettre majuscule, minuscule, chiffre et caractère spécial',
-    ptbr: 'A senha deve conter pelo menos 1 de cada: Letra maiúscula, minúscula, número e caractere especial'
   },
   password_min_length: {
     en: 'Password must have at least {value} characters',
@@ -88,6 +88,11 @@ export const text = {
     en: 'Send',
     fr: 'Envoyer',
     ptbr: 'Enviar'
+  },
+  theme_required: {
+    en: 'Theme is required',
+    fr: 'Thème requis',
+    ptbr: 'Tema é obrigatório'
   },
   theme_updated: {
     en: 'Theme updated',
