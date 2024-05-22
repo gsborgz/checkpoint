@@ -14,7 +14,7 @@ export function useLocale(): DictionaryData {
   const { language } = useContext(SessionContext);
 
   function locale(keyPath: string, args?: Record<string, any>): string {
-    const fullPath = `${keyPath}.${language}`;
+    const fullPath = keyPath.startsWith('language.') ? keyPath : `${keyPath}.${language}`;
 
     if (!hasValidPath(fullPath)) {
       return keyPath;

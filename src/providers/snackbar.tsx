@@ -43,7 +43,6 @@ export default function SnackbarProvider({ children }: { children: React.ReactNo
         showMessage(messageObj.key, messageObj.args, SnackbarTheme.Error);
       }
     } else {
-      // TODO: Retirar log
       console.error(message);
     }
   }

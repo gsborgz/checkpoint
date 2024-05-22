@@ -22,6 +22,7 @@
     "cy:run": "cypress run"
   },
   "dependencies": {
+    "@headlessui/react": "^2.0.3",
     "@prisma/adapter-pg": "^5.11.0",
     "@prisma/client": "^5.11.0",
     "bcrypt": "^5.1.1",
