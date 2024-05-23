@@ -20,12 +20,12 @@ export default function Profile() {
       <div className='flex flex-col bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-2 w-[36rem]'>
         <div className='flex flex-col gap-1'>
           <label>{locale('auth.username')}</label>
-          <span className='bg-stone-700 rounded-md py-1 px-2'>{user.username}</span>
+          <span className='bg-stone-100 dark:bg-stone-700 rounded-md py-1 px-2'>{user.username}</span>
         </div>
 
         <div className='flex flex-col gap-1'>
           <label>{locale('auth.email')}</label>
-          <span className='bg-stone-700 rounded-md py-1 px-2'>{user.email || '-'}</span>
+          <span className='bg-stone-100 dark:bg-stone-700 rounded-md py-1 px-2'>{user.email || '-'}</span>
         </div>
       </div>
 
