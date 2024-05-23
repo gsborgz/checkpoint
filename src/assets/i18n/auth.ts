@@ -6,7 +6,7 @@ export const auth = {
   },
   username: {
     en: 'Username',
-    fr: 'Nom d\'utilisateur',
+    fr: "Nom d'utilisateur",
     ptbr: 'Nome de usuário',
   },
   email: {
@@ -18,5 +18,5 @@ export const auth = {
     en: 'Profile',
     fr: 'Profil',
     ptbr: 'Perfil',
-  }
+  },
 };
