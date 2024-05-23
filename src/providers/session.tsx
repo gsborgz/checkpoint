@@ -25,6 +25,9 @@ export type SessionData = {
   user: User | null;
   language: UserLanguage;
   theme: UserTheme;
+  authRoutes: string[];
+  publicRoutes: string[];
+  currentRoute: string;
   changeLanguage: (language: UserLanguage) => void;
   changeTheme: (theme: UserTheme) => void;
 };
@@ -62,8 +65,8 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  if (!mounted || session.status === 'loading') {
-    return <div>Loading...</div>;
+  if (!mounted || (session.status === 'loading' && !session.data)) {
+    return <div className='w-full h-full flex flex-col items-end justify-end'>Loading...</div>;
   }
 
   if (
@@ -142,6 +145,9 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
         user,
         language,
         theme: theme as UserTheme,
+        authRoutes,
+        publicRoutes,
+        currentRoute,
         changeLanguage,
         changeTheme,
       }}

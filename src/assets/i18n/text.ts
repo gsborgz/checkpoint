@@ -9,11 +9,6 @@ export const text = {
     fr: 'Confirmez votre mot de passe',
     ptbr: 'Confirme sua senha',
   },
-  delete_account: {
-    en: 'Delete Account',
-    fr: 'Supprimer le compte',
-    ptbr: 'Excluir conta',
-  },
   email_required: {
     en: 'Email is required',
     fr: 'Email est requis',

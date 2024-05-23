@@ -1,20 +1,12 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocale } from '@/hooks/locale';
 import { AppStatus } from '@/app/api/v1/status/route';
-import { SessionContext } from '../../providers/session';
-import { UserLanguage, UserTheme } from '@prisma/client';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
 export default function Status() {
   const { locale } = useLocale();
   const [status, setStatus] = useState<AppStatus>();
-  const { theme, changeLanguage, changeTheme } = useContext(SessionContext);
-  const isDarkThemeEnabled = theme === UserTheme.dark;
-  const languages = Object.values(UserLanguage);
-  const sunIcon = <SunIcon className='h-5 w-5 text-stone-300' />;
-  const moonIcon = <MoonIcon className='h-5 w-5 text-stone-950' />;
 
   useEffect(() => {
     async function getStatus() {
@@ -32,30 +24,7 @@ export default function Status() {
   }
 
   return (
-    <section className='flex flex-col gap-4 h-full'>
-      <div className='flex gap-2'>
-        {languages.map((language) => (
-          <button
-            id={`set-language-${language}-button`}
-            className='p-2 w-20 border dark:border-stone-100 border-stone-950 rounded-md'
-            key={language}
-            onClick={() => changeLanguage(language)}
-          >
-            {language}
-          </button>
-        ))}
-      </div>
-
-      <button
-        id={`set-theme-button`}
-        aria-label='Change Theme'
-        type='button'
-        className='p-2 w-fit border dark:border-stone-100 border-stone-950 rounded-md'
-        onClick={() => changeTheme(isDarkThemeEnabled ? UserTheme.light : UserTheme.dark)}
-      >
-        {isDarkThemeEnabled ? sunIcon : moonIcon}
-      </button>
-
+    <section className='flex flex-col gap-4 h-full w-full items-center justify-center'>
       <div className='flex flex-col items-center justify-center gap-3'>
         <h1>{locale('status.title')}</h1>
 
