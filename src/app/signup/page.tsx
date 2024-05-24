@@ -27,7 +27,7 @@ export default function SignIn() {
     try {
       const body = { username, password, password_confirmation: passwordConfirmation, theme, language };
 
-      await clientSignupSchema.validate(body);
+      clientSignupSchema.validateSync(body);
 
       const response = await fetch('api/v1/auth/signup', {
         method: 'POST',

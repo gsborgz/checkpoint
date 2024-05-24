@@ -9,7 +9,7 @@ import { HomeIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
 export default function Sidebar() {
-  const { user, publicRoutes, currentRoute, authRoutes } = useContext(SessionContext);
+  const { publicRoutes, currentRoute, authRoutes } = useContext(SessionContext);
 
   const privateSidebar = (
     <header className='flex flex-col items-center justify-between p-3 bg-stone-200 dark:bg-stone-900'>
