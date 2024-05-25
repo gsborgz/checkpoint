@@ -2,11 +2,12 @@
 
 import { noteSchema } from '@/validations/notes';
 import { SnackbarContext } from '@/providers/snackbar';
-import { useContext, useEffect, useState } from 'react';
+import { SyntheticEvent, useContext, useEffect, useState } from 'react';
 import { Note } from '@prisma/client';
 import { PlusIcon, StarIcon as SolidStarIcon } from '@heroicons/react/24/solid';
 import { StarIcon as OutlineStarIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useLocale } from '@/hooks/locale';
+import { DeleteButton } from '../components/delete-button';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -37,7 +38,9 @@ export default function Home() {
     setNotes(result);
   }
 
-  async function createNote() {
+  async function createNote(event: SyntheticEvent) {
+    event.preventDefault();
+
     try {
       const body = { description: noteDescription, favorite: noteFavorite };
 
@@ -46,6 +49,29 @@ export default function Home() {
       await fetch('/api/v1/notes', { method: 'POST', body: JSON.stringify(body) });
 
       cleanNoteCreation();
+      getNotes();
+    } catch (error) {
+      showErrorMessage(error.message);
+    }
+  }
+
+  async function updateNoteFavorite(note: Note) {
+    try {
+      await fetch(`/api/v1/notes/${note.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ favorite: !note.favorite }),
+      });
+
+      getNotes();
+    } catch (error) {
+      showErrorMessage(error.message);
+    }
+  }
+
+  async function deleteNote(note: Note) {
+    try {
+      await fetch(`/api/v1/notes/${note.id}`, { method: 'DELETE' });
+
       getNotes();
     } catch (error) {
       showErrorMessage(error.message);
@@ -71,7 +97,10 @@ export default function Home() {
           </button>
         </div>
       ) : (
-        <div className='flex w-[60rem] items-center bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-4'>
+        <form
+          className='flex w-[60rem] items-center bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-4'
+          onSubmit={createNote}
+        >
           <input
             className='h-10 w-full rounded-md p-2 bg-transparent border dark:border-stone-100 border-stone-950'
             type='text'
@@ -88,10 +117,7 @@ export default function Home() {
             {noteFavorite ? favoriteIcon : nonFavoriteIcon}
           </button>
 
-          <button
-            type='button'
-            onClick={createNote}
-          >
+          <button type='submit'>
             <CheckIcon className='w-5 h-5 text-green-400' />
           </button>
 
@@ -101,16 +127,26 @@ export default function Home() {
           >
             <XMarkIcon className='w-5 h-5 text-red-500' />
           </button>
-        </div>
+        </form>
       )}
 
       {notes.map((note) => (
-        <div className='flex w-[60rem] bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-2 items-center'>
+        <div
+          className='flex w-[60rem] bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-2 items-center'
+          key={note.id}
+        >
           <span className='flex items-center w-full h-10 bg-stone-100 dark:bg-stone-700 rounded-md py-1 px-2'>
             {note.description}
           </span>
 
-          {note.favorite ? favoriteIcon : null}
+          <button
+            type='button'
+            onClick={() => updateNoteFavorite(note)}
+          >
+            {note.favorite ? favoriteIcon : nonFavoriteIcon}
+          </button>
+
+          <DeleteButton onClick={() => deleteNote(note)} />
         </div>
       ))}
     </section>
