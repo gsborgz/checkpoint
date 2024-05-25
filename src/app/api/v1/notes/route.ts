@@ -1,6 +1,6 @@
 import { Note } from '@prisma/client';
 import { pgDatabase } from '@/core/pg-database';
-import { getSessionUser } from "@/core/auth";
+import { getSessionUser } from '@/core/auth';
 import { noteSchema } from '../../../../validations/notes';
 import { NextResponse } from 'next/server';
 

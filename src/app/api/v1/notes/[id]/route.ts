@@ -1,8 +1,8 @@
-import { getSessionUser } from "@/core/auth";
-import { pgDatabase } from "@/core/pg-database";
-import { Note } from "@prisma/client";
-import { RouteParams } from "@/types/utils";
-import { NextResponse } from "next/server";
+import { getSessionUser } from '@/core/auth';
+import { pgDatabase } from '@/core/pg-database';
+import { Note } from '@prisma/client';
+import { RouteParams } from '@/types/utils';
+import { NextResponse } from 'next/server';
 
 export async function PUT(request: Request, { params }: RouteParams) {
   const body: Note = await request.json();
