@@ -28,7 +28,7 @@ model User {
   theme UserTheme @default(value: dark)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  notes Note[]
+  notes Note[] 
 }
 
 model Note {
@@ -37,6 +37,6 @@ model Note {
   favorite Boolean @default(value: false)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 }

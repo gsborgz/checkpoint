@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import buildTranslationJson from '@/utils/build-translation-json';
 
 const usernameMinLength = 3;
-const usernameMaxLength = 10;
+const usernameMaxLength = 15;
 const usernameRegex = /^[a-zA-Z0-9_]*$/;
 const passwordMinLength = 8;
 

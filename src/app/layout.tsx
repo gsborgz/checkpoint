@@ -15,15 +15,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       lang='en'
     >
-      <body className='h-screen'>
+      <body className='h-screen dark:text-stone-100 text-stone-950'>
         <ThemeProvider attribute='class'>
           <NextAuthSessionProvider>
             <SnackbarProvider>
-              <main className='bg-stone-100 dark:bg-stone-950 dark:text-stone-100 text-stone-950 h-full flex'>
-                <Sidebar />
+              <Sidebar />
 
-                {children}
-              </main>
+              <main className='h-full flex bg-stone-100 dark:bg-stone-950 ml-14'>{children}</main>
             </SnackbarProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>

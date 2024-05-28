@@ -49,8 +49,9 @@ export default function CreateNoteButton({ onCreate }: CreateNoteButtonProps) {
       {!creatingNote ? (
         <div>
           <button
+            id='create-note-button'
             type='button'
-            className='p-3 border dark:border-stone-100 border-stone-950 rounded-md'
+            className='p-3 border dark:border-stone-100 border-stone-950 rounded-md hover:bg-stone-200 hover:dark:bg-stone-800'
             onClick={() => setCreatingNote(true)}
           >
             <PlusIcon className='w-[1.9rem] h-[1.9rem]' />
@@ -72,6 +73,7 @@ export default function CreateNoteButton({ onCreate }: CreateNoteButtonProps) {
 
           <button
             type='button'
+            id='favorite-new-note-button'
             onClick={() => setNoteFavorite(!noteFavorite)}
             onMouseEnter={() => setActiveFavoriteIcon(favoriteIconHover)}
             onMouseLeave={() => setActiveFavoriteIcon(nonFavoriteIcon)}
@@ -84,6 +86,7 @@ export default function CreateNoteButton({ onCreate }: CreateNoteButtonProps) {
           </button>
 
           <button
+            id='cancel-note-creation-button'
             type='button'
             onClick={cleanNoteCreation}
           >

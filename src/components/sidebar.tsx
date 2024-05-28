@@ -12,7 +12,7 @@ export default function Sidebar() {
   const { publicRoutes, currentRoute, authRoutes } = useContext(SessionContext);
 
   const privateSidebar = (
-    <header className='flex flex-col items-center justify-between p-3 bg-stone-200 dark:bg-stone-900'>
+    <header className='flex flex-col items-center justify-between w-14 p-3 h-screen fixed bg-stone-200 dark:bg-stone-900'>
       <div className='flex flex-col items-center gap-2'>
         <Avatar />
 

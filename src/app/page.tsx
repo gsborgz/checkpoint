@@ -57,23 +57,28 @@ export default function Home() {
     <section className='flex flex-col items-center gap-4 w-full h-full p-4'>
       <CreateNoteButton onCreate={getNotes} />
 
-      {notes.map((note) => (
-        <div
-          className='flex w-[60rem] bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-2 items-center'
-          key={note.id}
-        >
-          <span className='flex items-center w-full h-10 bg-stone-100 dark:bg-stone-700 rounded-md py-1 px-2'>
-            {note.description}
-          </span>
+      <div className='flex flex-col gap-4'>
+        {notes.map((note) => (
+          <div
+            className='note-card flex w-[60rem] bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-2 items-center'
+            key={note.id}
+          >
+            <p
+              className='flex items-center w-full min-h-[2rem] bg-stone-100 dark:bg-stone-700 rounded-md py-2 px-2 break-words'
+              style={{ overflowWrap: 'anywhere' }}
+            >
+              {note.description}
+            </p>
 
-          <FavoriteButton
-            onClick={() => updateNoteFavorite(note)}
-            favorite={note.favorite}
-          />
+            <FavoriteButton
+              onClick={() => updateNoteFavorite(note)}
+              favorite={note.favorite}
+            />
 
-          <DeleteButton onClick={() => deleteNote(note)} />
-        </div>
-      ))}
+            <DeleteButton onClick={() => deleteNote(note)} />
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
