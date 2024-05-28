@@ -28,6 +28,8 @@ export type SessionData = {
   authRoutes: string[];
   publicRoutes: string[];
   currentRoute: string;
+  isPublicRoute: boolean;
+  isAuthRoute: boolean;
   changeLanguage: (language: UserLanguage) => void;
   changeTheme: (theme: UserTheme) => void;
 };
@@ -42,6 +44,8 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   const authRoutes = ['/signin', '/signup'];
   const publicRoutes = ['/status'];
   const currentRoute = usePathname();
+  const isPublicRoute = publicRoutes.includes(currentRoute);
+  const isAuthRoute = authRoutes.includes(currentRoute);
   const session = useSession();
 
   useEffect(() => {
@@ -69,11 +73,7 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
     return <div className='w-full h-full flex flex-col items-end justify-end'>Loading...</div>;
   }
 
-  if (
-    session.status === 'unauthenticated' &&
-    !authRoutes.includes(currentRoute) &&
-    !publicRoutes.includes(currentRoute)
-  ) {
+  if (session.status === 'unauthenticated' && !isAuthRoute && !isPublicRoute) {
     if (user) {
       setUser(null);
     }
@@ -92,7 +92,7 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
       setTheme(user.theme.toLocaleLowerCase());
     }
 
-    if (authRoutes.includes(currentRoute)) {
+    if (isAuthRoute) {
       window.location.replace('/');
     }
   }
@@ -148,6 +148,8 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
         authRoutes,
         publicRoutes,
         currentRoute,
+        isPublicRoute,
+        isAuthRoute,
         changeLanguage,
         changeTheme,
       }}
