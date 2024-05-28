@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import NextAuthSessionProvider from '@/providers/session';
 import SnackbarProvider from '@/providers/snackbar';
 import Sidebar from '@/components/sidebar';
+import Main from '@/components/main';
 
 export const metadata = {
   title: 'Checkpoint',
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SnackbarProvider>
               <Sidebar />
 
-              <main className='h-full flex bg-stone-100 dark:bg-stone-950 ml-14'>{children}</main>
+              <Main>{children}</Main>
             </SnackbarProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>
