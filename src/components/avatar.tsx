@@ -16,8 +16,8 @@ export default function Avatar() {
   return (
     <Menu>
       <MenuButton
-        id={`set-theme-button`}
-        aria-label='Change Theme'
+        id='avatar-button'
+        aria-label='Session options'
         className='p-2 w-fit border dark:border-stone-100 border-stone-950 rounded-md'
       >
         <UserIcon className='h-5 w-5 text-stone-950 dark:text-stone-100' />

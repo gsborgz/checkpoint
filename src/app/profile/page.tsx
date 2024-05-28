@@ -30,6 +30,7 @@ export default function Profile() {
       </div>
 
       <button
+        id='delete-account-button'
         className='border border-red-500 text-red-500 p-2 w-[36rem] rounded-md hover:border-red-300 hover:text-red-300'
         onClick={deleteAccount}
       >
