@@ -58,7 +58,7 @@ export default function Home() {
       <CreateNoteButton onCreate={getNotes} />
 
       <div className='flex flex-col gap-4'>
-        {notes.map((note) => (
+        {notes.map((note, index) => (
           <div
             className='note-card flex w-[60rem] bg-stone-300 p-2 dark:bg-stone-800 rounded-md gap-2 items-center'
             key={note.id}
@@ -71,11 +71,15 @@ export default function Home() {
             </p>
 
             <FavoriteButton
+              id={index.toString()}
               onClick={() => updateNoteFavorite(note)}
               favorite={note.favorite}
             />
 
-            <DeleteButton onClick={() => deleteNote(note)} />
+            <DeleteButton
+              id={index.toString()}
+              onClick={() => deleteNote(note)}
+            />
           </div>
         ))}
       </div>

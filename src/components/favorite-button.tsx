@@ -8,7 +8,7 @@ type FavoriteButtonProps = {
   favorite: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function FavoriteButton({ onClick, favorite, className }: FavoriteButtonProps) {
+export default function FavoriteButton({ id, onClick, favorite, className }: FavoriteButtonProps) {
   const favoriteIcon = <SolidStarIcon className='w-5 h-5 text-yellow-400' />;
   const favoriteIconHover = <SolidStarIcon className='w-5 h-5 text-stone-950 dark:text-stone-100' />;
   const nonFavoriteIcon = <OutlineStarIcon className='w-5 h-5 text-stone-950 dark:text-stone-100' />;
@@ -16,7 +16,9 @@ export default function FavoriteButton({ onClick, favorite, className }: Favorit
 
   return (
     <button
+      id={`favorite-button-${id}`}
       type='button'
+      className={className}
       onClick={onClick}
       onMouseEnter={() => setActiveFavoriteIcon(favoriteIconHover)}
       onMouseLeave={() => setActiveFavoriteIcon(nonFavoriteIcon)}

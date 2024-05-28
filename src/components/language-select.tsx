@@ -15,8 +15,8 @@ export default function LanguageSelect() {
   return (
     <Menu>
       <MenuButton
-        id={`set-theme-button`}
-        aria-label='Change Theme'
+        id={`set-language-button`}
+        aria-label='Change Language'
         className='p-2 w-fit'
       >
         <GlobeAltIcon className='h-5 w-5 text-stone-950 dark:text-stone-100' />
