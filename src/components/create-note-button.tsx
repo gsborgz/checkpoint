@@ -4,6 +4,7 @@ import { SnackbarContext } from '@/providers/snackbar';
 import { PlusIcon, StarIcon as SolidStarIcon } from '@heroicons/react/24/solid';
 import { StarIcon as OutlineStarIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { SyntheticEvent, useContext, useState } from 'react';
+import cryptr from '@/utils/cryptr';
 
 type CreateNoteButtonProps = {
   onCreate: () => void;
@@ -27,6 +28,8 @@ export default function CreateNoteButton({ onCreate }: CreateNoteButtonProps) {
       const body = { description: noteDescription, favorite: noteFavorite };
 
       noteSchema.validateSync(body);
+
+      body.description = cryptr.encrypt(body.description);
 
       await fetch('/api/v1/notes', { method: 'POST', body: JSON.stringify(body) });
 
