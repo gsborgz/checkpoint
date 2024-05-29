@@ -38,7 +38,7 @@ describe('Notes', () => {
     cy.get('.note-card')
       .invoke('text')
       .then((text) => {
-        const textArray = (text.split(';')).filter((text) => !!text);
+        const textArray = text.split(';').filter((text) => !!text);
 
         expect(textArray).to.have.lengthOf(1);
         expect(textArray[0]).to.be.equal(`${testText}1`);
@@ -53,7 +53,7 @@ describe('Notes', () => {
     cy.get('.note-card')
       .invoke('text')
       .then((text) => {
-        const textArray = (text.split(';')).filter((text) => !!text);
+        const textArray = text.split(';').filter((text) => !!text);
 
         expect(textArray).to.have.lengthOf(2);
         expect(textArray[0]).to.be.equal(`${testText}2`);
@@ -67,7 +67,7 @@ describe('Notes', () => {
     cy.get('.note-card')
       .invoke('text')
       .then((text) => {
-        const textArray = (text.split(';')).filter((text) => !!text);
+        const textArray = text.split(';').filter((text) => !!text);
 
         expect(textArray).to.have.lengthOf(2);
         expect(textArray[0]).to.be.equal(`${testText}1`);
@@ -81,7 +81,7 @@ describe('Notes', () => {
     cy.get('.note-card')
       .invoke('text')
       .then((text) => {
-        const textArray = (text.split(';')).filter((text) => !!text);
+        const textArray = text.split(';').filter((text) => !!text);
 
         expect(textArray).to.have.lengthOf(1);
         expect(textArray[0]).to.be.equal(`${testText}2`);
