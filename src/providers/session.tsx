@@ -8,6 +8,7 @@ import { createContext } from 'react';
 import { User, UserLanguage, UserTheme } from '@prisma/client';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import CircleLoader from '@/components/circle-loader';
 
 interface NextAuthSessionProviderProps {
   children: ReactNode;
@@ -70,7 +71,11 @@ function AppSessionProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (!mounted || (session.status === 'loading' && !session.data)) {
-    return <div className='w-full h-full flex flex-col items-end justify-end'>Loading...</div>;
+    return (
+      <div className='fixed w-full h-full flex items-center justify-center'>
+        <CircleLoader />
+      </div>
+    );
   }
 
   if (session.status === 'unauthenticated' && !isAuthRoute && !isPublicRoute) {

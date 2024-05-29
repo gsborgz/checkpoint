@@ -3,6 +3,7 @@ import { pgDatabase } from '@/core/pg-database';
 import { getSessionUser } from '@/core/auth';
 import { noteSchema } from '@/validations/notes';
 import { NextResponse } from 'next/server';
+import cryptr from '@/utils/cryptr';
 
 export async function GET() {
   const user = await getSessionUser();
@@ -22,14 +23,15 @@ export async function POST(request: Request) {
   const body: Note = await request.json();
 
   try {
+    body.description = cryptr.decrypt(body.description);
+
     noteSchema.validateSync(body);
   } catch (error) {
     return NextResponse.json(error.message, { status: 400 });
   }
 
   body.user_id = user.id;
-
-  // TODO: implementar encriptação e2e
+  body.description = cryptr.encrypt(body.description);
 
   const note = await pgDatabase.note.create({ data: body });
 
