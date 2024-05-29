@@ -1,9 +1,9 @@
+import { RouteParams } from '@/types/utils';
 import { getSessionUser } from '@/core/auth';
 import { pgDatabase } from '@/core/pg-database';
-import { RouteParams } from '@/types/utils';
 import { NextResponse } from 'next/server';
 
-export async function DELETE(request: Request, { params }: RouteParams) {
+export async function PUT(request: Request, { params }: RouteParams) {
   const user = await getSessionUser();
   const note = await pgDatabase.note.findUnique({ where: { id: params.id, user_id: user.id } });
 
@@ -11,7 +11,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
     return NextResponse.json({ message: 'notes.not_found' }, { status: 404 });
   }
 
-  await pgDatabase.note.delete({ where: { id: params.id } });
+  const updatedNote = await pgDatabase.note.update({ where: { id: params.id }, data: { favorite: !note.favorite } });
 
-  return Response.json({ message: 'notes.successfully_deleted' });
+  return Response.json(updatedNote);
 }

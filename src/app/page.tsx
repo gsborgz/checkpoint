@@ -44,7 +44,7 @@ export default function Home() {
 
   async function updateNoteFavorite(note: Note) {
     try {
-      await fetch(`/api/v1/notes/${note.id}`, {
+      await fetch(`/api/v1/notes/${note.id}/favorite`, {
         method: 'PUT',
         body: JSON.stringify({ favorite: !note.favorite }),
       });
